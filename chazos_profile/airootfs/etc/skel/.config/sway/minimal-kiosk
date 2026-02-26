@@ -1,0 +1,9 @@
+default_border none
+default_floating_border none
+font pango:monospace 0
+titlebar_padding 0
+
+output * bg #000000 solid_color
+
+# Start the app and exit sway when it closes
+exec $APP_CMD && swaymsg exit

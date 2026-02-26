@@ -1,0 +1,49 @@
+name: Build Chazos ISO
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: archlinux:latest
+      options: --privileged
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          pacman -Syu --noconfirm archiso base-devel git
+          # Initialize pacman keys for the container
+          pacman-key --init
+          pacman-key --populate archlinux
+
+      - name: Setup Custom Repo & Build Yay
+        run: |
+          mkdir -p chazos_profile/custom_repo
+          git clone https://aur.archlinux.org/yay-bin.git
+          cd yay-bin
+          # makepkg cannot run as root, create a build user
+          useradd -m builduser
+          chown -R builduser:builduser .
+          sudo -u builduser makepkg -sc --noconfirm
+          mv *.pkg.tar.zst ../chazos_profile/custom_repo/
+          cd ..
+          repo-add chazos_profile/custom_repo/custom.db.tar.gz chazos_profile/custom_repo/*.pkg.tar.zst
+
+      - name: Build ISO
+        run: |
+          # Use a custom pacman.conf for the build to use the local repo
+          # Ensure the path in pacman.conf is relative or accessible in the container
+          sed -i "s|Server = file:///.*|Server = file://$(pwd)/chazos_profile/custom_repo|g" chazos_profile/pacman.conf
+          mkarchiso -v -w work -o out chazos_profile/
+
+      - name: Upload ISO Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: chazos-iso
+          path: out/*.iso

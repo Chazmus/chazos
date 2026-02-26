@@ -1,0 +1,5 @@
+work/
+out/
+chazos_profile/custom_repo/*.pkg.tar.*
+chazos_profile/custom_repo/*.db*
+chazos_profile/custom_repo/*.sig

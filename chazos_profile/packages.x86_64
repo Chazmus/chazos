@@ -1,0 +1,29 @@
+# Base System
+base
+linux
+linux-firmware
+systemd
+neovim
+polkit
+
+# Networking
+networkmanager
+
+# Display / GUI Wrapper
+sway
+wayland
+xorg-xwayland
+kitty
+
+# Nvidia Support
+nvidia-dkms
+nvidia-utils
+egl-wayland
+
+# Dependencies for Yay
+base-devel
+git
+yay-bin
+syslinux
+memtest86+
+memtest86+-efi
