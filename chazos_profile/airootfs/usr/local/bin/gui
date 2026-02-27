@@ -1,0 +1,19 @@
+#!/bin/bash
+# Chazos GUI Launcher
+# If Sway is already running, just exec the command as a new pane.
+# Otherwise, start the Chazos session.
+
+if [ -z "$1" ]; then
+    # Default to terminal if no command provided
+    CMD="kitty"
+else
+    CMD="$@"
+fi
+
+if [ -n "$SWAYSOCK" ]; then
+    swaymsg exec -- "$CMD"
+else
+    # Start Sway with the Chazos config. 
+    # The config itself is set to auto-start a terminal.
+    sway -c /etc/skel/.config/sway/chazos.conf
+fi
