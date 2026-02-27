@@ -1,11 +1,11 @@
-# Specification: Custom Terminal-First Arch Linux Distribution
+# Specification: Chazos - Zellij-inspired Arch Linux OS
 
 ## 1. Project Overview
 
 * **Base System:** Arch Linux.
 * **Build Tool:** `archiso` (using the `releng` profile as a starting point).
-* **Core Philosophy:** A completely terminal-first, TTY-based operating system. There is no persistent Desktop Environment or Display Manager.
-* **GUI Handling (The "Invisible Window Manager"):** GUI applications are launched from the TTY via a wrapper script. This script spawns a highly minimal, transient `sway` Wayland session tailored specifically to run that single application (like IntelliJ or Firefox) full-screen. When the application is closed, Sway instantly terminates, returning the user seamlessly to the TTY.
+* **Core Philosophy:** A terminal-centric operating system where Sway acts as a system-wide multiplexer, mimicking the modal workflow of Zellij.
+* **The Multiplexer (Sway):** Instead of a traditional desktop environment, Sway is configured to boot directly into a Kitty terminal. It uses a modal interface (e.g., Super+P for panes, Super+T for tabs) to manage windows and workspaces, providing a seamless terminal-first experience.
 
 ## 2. Core Package List (`packages.x86_64`)
 
@@ -13,7 +13,7 @@ The following packages must be included in the `archiso` build:
 
 * **Base System:** `base`, `linux`, `linux-firmware`, `systemd`, `neovim`, `polkit`.
 * **Networking:** `networkmanager`.
-* **Display / GUI Wrapper:** `sway`, `wayland`, `xorg-xwayland`, `kitty` (or Alacritty/Foot).
+* **Multiplexer / Terminal:** `sway`, `wayland`, `xorg-xwayland`, `kitty`, `dmenu`.
 * **Nvidia Support:** `nvidia-dkms`, `nvidia-utils`, `egl-wayland`.
 
 ## 3. System Configuration (`airootfs` Overlays)
@@ -41,14 +41,18 @@ Ensure the OS can boot and run Sway with proprietary Nvidia drivers without brea
         * `GBM_BACKEND=nvidia-drm`
         * `__GLX_VENDOR_LIBRARY_NAME=nvidia`
 
-### C. The GUI Wrapper System
+### C. The Zellij-like Configuration
 
-1. **The Launcher Script:**
-    * **File:** `/usr/local/bin/gui` (Executable).
-    * **Function:** Accepts an application command as an argument (e.g., `gui intellij`), launches Sway using a specific minimal configuration file, and passes the application command to Sway to execute immediately.
-2. **The Minimal Sway Config:**
-    * **File:** `/etc/skel/.config/sway/minimal-kiosk`
-    * **Function:** Disables the status bar, window borders, and workspace switching. Forces the launched application to be full-screen. Crucially, monitors the PID of the launched application and terminates the Sway session (`swaymsg exit`) the moment the application closes.
+1. **The Multiplexer Config:**
+    * **File:** `/etc/skel/.config/sway/chazos.conf`
+    * **Function:** Configures Sway with a modal interface.
+    * **Modes:**
+        * **Pane Mode (Super+P):** For splitting, moving, and resizing panes.
+        * **Tab Mode (Super+T):** For managing workspaces (tabs).
+        * **Resize Mode (Super+R):** For fine-tuned window resizing.
+2. **Auto-start:**
+    * **File:** `/root/.zlogin` (or user equivalent)
+    * **Action:** Automatically launches `sway -c /etc/skel/.config/sway/chazos.conf` on TTY1 login.
 
 ## 4. Bootloader Configuration (ISO Boot Menu)
 

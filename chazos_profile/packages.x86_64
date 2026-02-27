@@ -14,6 +14,8 @@ sway
 wayland
 xorg-xwayland
 kitty
+dmenu
+jq
 
 # Nvidia Support
 nvidia-dkms
