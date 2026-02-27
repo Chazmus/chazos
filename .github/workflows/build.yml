@@ -40,6 +40,8 @@ jobs:
           # Use a custom pacman.conf for the build to use the local repo
           # Ensure the path in pacman.conf is relative or accessible in the container
           sed -i "s|Server = file:///.*|Server = file://$(pwd)/chazos_profile/custom_repo|g" chazos_profile/pacman.conf
+          # Also ensure Include lines point to the correct system path in the container
+          sed -i 's|^Include = .*|Include = /etc/pacman.d/mirrorlist|g' chazos_profile/pacman.conf
           mkarchiso -v -w work -o out chazos_profile/
 
       - name: Upload ISO Artifact
