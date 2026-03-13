@@ -1,16 +1,29 @@
 # Base System
 base
 linux
+linux-headers
 linux-firmware
 systemd
 neovim
 polkit
+zsh
+archinstall
+mkinitcpio
+mkinitcpio-archiso
+device-mapper
+squashfs-tools
+archiso
+pv
+intel-ucode
+amd-ucode
 
 # Networking
 networkmanager
 
 # Display / GUI Wrapper
 sway
+swaybg
+polkit-gnome
 wayland
 xorg-xwayland
 kitty
@@ -18,7 +31,7 @@ dmenu
 jq
 
 # Nvidia Support
-nvidia-dkms
+nvidia-open
 nvidia-utils
 egl-wayland
 

@@ -10,6 +10,14 @@ else
     CMD="$@"
 fi
 
+if [ -z "$XDG_RUNTIME_DIR" ]; then
+    export XDG_RUNTIME_DIR=/run/user/$(id -u)
+    if [ ! -d "$XDG_RUNTIME_DIR" ]; then
+        mkdir -p "$XDG_RUNTIME_DIR"
+        chmod 700 "$XDG_RUNTIME_DIR"
+    fi
+fi
+
 if [ -n "$SWAYSOCK" ]; then
     swaymsg exec -- "$CMD"
 else
