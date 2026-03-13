@@ -7,6 +7,7 @@ systemd
 neovim
 polkit
 zsh
+fish
 archinstall
 mkinitcpio
 mkinitcpio-archiso
@@ -30,16 +31,29 @@ kitty
 dmenu
 jq
 waybar
+ttf-jetbrains-mono-nerd
 
 # Nvidia Support
 nvidia-open
 nvidia-utils
 egl-wayland
 
-# Dependencies for Yay
+# Development & Power Tools
 base-devel
 git
+fzf
+ripgrep
+fd
+the_silver_searcher
+eza
+bat
+btop
+zoxide
+dust
+lazygit
 yay-bin
+
+# Bootloader & Testing
 syslinux
 memtest86+
 memtest86+-efi
