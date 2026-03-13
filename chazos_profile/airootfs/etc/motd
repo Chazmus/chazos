@@ -1,12 +1,1 @@
---------------------------------------------------------------------------
-                     Welcome to Chazos (Terminal-First OS)
---------------------------------------------------------------------------
-
-To start the installer and set up Chazos on your disk, run:
-
-    chazos-install
-
-Alternatively, just type 'gui' to launch the live environment.
-
-- GitHub: https://github.com/cbailey/chazos
---------------------------------------------------------------------------
+# Chazos
