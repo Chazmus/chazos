@@ -29,6 +29,7 @@ xorg-xwayland
 kitty
 dmenu
 jq
+waybar
 
 # Nvidia Support
 nvidia-open
