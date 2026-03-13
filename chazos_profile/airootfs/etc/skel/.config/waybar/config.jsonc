@@ -1,18 +1,16 @@
 [
     {
+        "name": "top-bar",
         "layer": "top",
         "position": "top",
         "height": 30,
-        "modules-left": ["sway/workspaces", "sway/mode"],
+        "modules-left": ["sway/workspaces"],
         "modules-center": ["clock"],
-        "modules-right": ["cpu", "memory", "network"],
+        "modules-right": ["cpu", "memory"],
 
         "sway/workspaces": {
             "format": " {name} ",
             "all-outputs": true
-        },
-        "sway/mode": {
-            "format": " <span style=\"italic\">{}</span> "
         },
         "clock": {
             "format": "{:%Y-%m-%d | %H:%M}"
@@ -25,16 +23,16 @@
         }
     },
     {
+        "name": "bottom-bar",
         "layer": "top",
         "position": "bottom",
         "height": 30,
-        "modules-left": ["custom/mode-label"],
+        "modules-left": ["sway/mode"],
         "modules-center": ["custom/hint"],
         
-        "custom/mode-label": {
-            "exec": "swaymsg -t get_outputs | jq -r '.[0].current_mode.name' || echo 'NORMAL'",
-            "interval": 1,
-            "format": " MODE: {} "
+        "sway/mode": {
+            "format": " MODE: {} ",
+            "tooltip": false
         },
         "custom/hint": {
             "format": " [Super+G] Chazos Menu | [Super+P] Pane | [Super+T] Tab "
