@@ -1,0 +1,19 @@
+#!/bin/bash
+# Chazos Installer Wrapper
+# This script launches archinstall, the official Arch Linux installer.
+# It can eventually be pre-loaded with a Chazos configuration.
+
+echo "--------------------------------------------------"
+echo " Welcome to the Chazos Installer!"
+echo "--------------------------------------------------"
+echo "This script will help you install Chazos to your disk."
+echo "It uses the official 'archinstall' tool to handle"
+echo "partitioning, networking, and system configuration."
+echo ""
+echo "Press ANY KEY to start the installer..."
+read -n 1 -s
+
+# Launch archinstall
+# We'll eventually be able to pass a --config file here to 
+# pre-set Chazos-specific defaults.
+sudo archinstall

@@ -1,0 +1,19 @@
+#!/bin/bash
+clear
+echo -e "\e[1;34m--------------------------------------------------------------------------\e[0m"
+echo -e "\e[1;36m                     Welcome to Chazos (Terminal-First OS)\e[0m"
+echo -e "\e[1;34m--------------------------------------------------------------------------\e[0m"
+echo ""
+echo -e "You are currently in the \e[1;32mLive Environment\e[0m."
+echo ""
+echo -e "To install Chazos permanently to your disk, run:"
+echo -e "    \e[1;33mchazos-install\e[0m"
+echo ""
+echo -e "Quick Modal Tips (Zellij-like):"
+echo -e "  - \e[1;35mSuper+p\e[0m: Pane Mode (n: new, d: down, r: right, x: close)"
+echo -e "  - \e[1;35mSuper+t\e[0m: Tab Mode (n: new, h/l: switch, x: close)"
+echo ""
+echo -e "\e[1;34m--------------------------------------------------------------------------\e[0m"
+echo ""
+# Start a shell so the terminal stays open
+exec zsh

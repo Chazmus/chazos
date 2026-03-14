@@ -32,6 +32,7 @@ dmenu
 jq
 waybar
 ttf-jetbrains-mono-nerd
+chazos-config
 
 # Nvidia Support
 nvidia-open

@@ -1,0 +1,46 @@
+# Maintainer: Chazos <https://github.com/cbailey/chazos>
+pkgname=chazos-config
+pkgver=1.0.0
+pkgrel=1
+pkgdesc="Core configuration files and helper scripts for Chazos"
+arch=('any')
+url="https://github.com/cbailey/chazos"
+license=('MIT')
+depends=('sway' 'kitty' 'waybar' 'fish' 'jq' 'dmenu' 'ttf-jetbrains-mono-nerd')
+source=(
+    'chazos.conf'
+    'minimal-kiosk'
+    'kitty.conf'
+    'waybar-config.jsonc'
+    'waybar-style.css'
+    'waybar-top.jsonc'
+    'waybar-bottom.jsonc'
+    'config.fish'
+    'chazos-install'
+    'chazos-welcome'
+    'gui'
+    'nvidia-wayland.sh'
+    'nvidia.conf'
+)
+sha256sums=('SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP')
+
+package() {
+    # 1. Configs for /etc/skel
+    install -Dm644 chazos.conf "$pkgdir/etc/skel/.config/sway/chazos.conf"
+    install -Dm644 minimal-kiosk "$pkgdir/etc/skel/.config/sway/minimal-kiosk"
+    install -Dm644 kitty.conf "$pkgdir/etc/skel/.config/kitty/kitty.conf"
+    install -Dm644 waybar-config.jsonc "$pkgdir/etc/skel/.config/waybar/config.jsonc"
+    install -Dm644 waybar-style.css "$pkgdir/etc/skel/.config/waybar/style.css"
+    install -Dm644 waybar-top.jsonc "$pkgdir/etc/skel/.config/waybar/top.jsonc"
+    install -Dm644 waybar-bottom.jsonc "$pkgdir/etc/skel/.config/waybar/bottom.jsonc"
+    install -Dm644 config.fish "$pkgdir/etc/skel/.config/fish/config.fish"
+
+    # 2. Binaries
+    install -Dm755 chazos-install "$pkgdir/usr/local/bin/chazos-install"
+    install -Dm755 chazos-welcome "$pkgdir/usr/local/bin/chazos-welcome"
+    install -Dm755 gui "$pkgdir/usr/local/bin/gui"
+
+    # 3. Nvidia Support
+    install -Dm755 nvidia-wayland.sh "$pkgdir/etc/profile.d/nvidia-wayland.sh"
+    install -Dm644 nvidia.conf "$pkgdir/etc/mkinitcpio.conf.d/nvidia.conf"
+}

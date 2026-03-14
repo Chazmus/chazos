@@ -1,0 +1,15 @@
+{
+    "layer": "top",
+    "position": "bottom",
+    "height": 30,
+    "modules-left": ["sway/mode"],
+    "modules-center": ["custom/hint"],
+    
+    "sway/mode": {
+        "format": " MODE: {} ",
+        "tooltip": false
+    },
+    "custom/hint": {
+        "format": " [Super+G] Chazos Menu | [Super+P] Pane | [Super+T] Tab "
+    }
+}
