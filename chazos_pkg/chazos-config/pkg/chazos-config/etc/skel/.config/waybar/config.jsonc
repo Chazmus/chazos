@@ -1,0 +1,41 @@
+[
+    {
+        "name": "top-bar",
+        "layer": "top",
+        "position": "top",
+        "height": 30,
+        "modules-left": ["sway/workspaces"],
+        "modules-center": ["clock"],
+        "modules-right": ["cpu", "memory"],
+
+        "sway/workspaces": {
+            "format": " {name} ",
+            "all-outputs": true
+        },
+        "clock": {
+            "format": "{:%Y-%m-%d | %H:%M}"
+        },
+        "cpu": {
+            "format": "CPU: {usage}%"
+        },
+        "memory": {
+            "format": "MEM: {used}G"
+        }
+    },
+    {
+        "name": "bottom-bar",
+        "layer": "top",
+        "position": "bottom",
+        "height": 30,
+        "modules-left": ["sway/mode"],
+        "modules-center": ["custom/hint"],
+        
+        "sway/mode": {
+            "format": " MODE: {} ",
+            "tooltip": false
+        },
+        "custom/hint": {
+            "format": " [Super+G] Chazos Menu | [Super+P] Pane | [Super+T] Tab "
+        }
+    }
+]

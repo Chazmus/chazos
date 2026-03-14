@@ -1,0 +1,22 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 30,
+    "modules-left": ["sway/workspaces"],
+    "modules-center": ["clock"],
+    "modules-right": ["cpu", "memory"],
+
+    "sway/workspaces": {
+        "format": " {name} ",
+        "all-outputs": true
+    },
+    "clock": {
+        "format": "{:%Y-%m-%d | %H:%M}"
+    },
+    "cpu": {
+        "format": "CPU: {usage}%"
+    },
+    "memory": {
+        "format": "MEM: {used}G"
+    }
+}

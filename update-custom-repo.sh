@@ -41,19 +41,20 @@ LOCAL_PACKAGES=("chazos-config")
 
 for PKG in "${LOCAL_PACKAGES[@]}"; do
     echo "--- Syncing files for $PKG ---"
-    cp chazos_profile/airootfs/etc/skel/.config/sway/chazos.conf chazos_pkg/chazos-config/
-    cp chazos_profile/airootfs/etc/skel/.config/sway/minimal-kiosk chazos_pkg/chazos-config/
-    cp chazos_profile/airootfs/etc/skel/.config/kitty/kitty.conf chazos_pkg/chazos-config/
-    cp chazos_profile/airootfs/etc/skel/.config/waybar/config.jsonc chazos_pkg/chazos-config/waybar-config.jsonc
-    cp chazos_profile/airootfs/etc/skel/.config/waybar/style.css chazos_pkg/chazos-config/waybar-style.css
-    cp chazos_profile/airootfs/etc/skel/.config/waybar/top.jsonc chazos_pkg/chazos-config/waybar-top.jsonc
-    cp chazos_profile/airootfs/etc/skel/.config/waybar/bottom.jsonc chazos_pkg/chazos-config/waybar-bottom.jsonc
-    cp chazos_profile/airootfs/etc/skel/.config/fish/config.fish chazos_pkg/chazos-config/
-    cp chazos_profile/airootfs/usr/local/bin/chazos-install chazos_pkg/chazos-config/
-    cp chazos_profile/airootfs/usr/local/bin/chazos-welcome chazos_pkg/chazos-config/
-    cp chazos_profile/airootfs/usr/local/bin/gui chazos_pkg/chazos-config/
-    cp chazos_profile/airootfs/etc/profile.d/nvidia-wayland.sh chazos_pkg/chazos-config/
-    cp chazos_profile/airootfs/etc/mkinitcpio.conf.d/nvidia.conf chazos_pkg/chazos-config/
+    # Sync from chazos_configs/ which is now the source of truth
+    cp chazos_configs/sway/chazos.conf chazos_pkg/chazos-config/
+    cp chazos_configs/sway/minimal-kiosk chazos_pkg/chazos-config/
+    cp chazos_configs/kitty/kitty.conf chazos_pkg/chazos-config/
+    cp chazos_configs/waybar/config.jsonc chazos_pkg/chazos-config/waybar-config.jsonc
+    cp chazos_configs/waybar/style.css chazos_pkg/chazos-config/waybar-style.css
+    cp chazos_configs/waybar/top.jsonc chazos_pkg/chazos-config/waybar-top.jsonc
+    cp chazos_configs/waybar/bottom.jsonc chazos_pkg/chazos-config/waybar-bottom.jsonc
+    cp chazos_configs/fish/config.fish chazos_pkg/chazos-config/
+    cp chazos_configs/bin/chazos-install chazos_pkg/chazos-config/
+    cp chazos_configs/bin/chazos-welcome chazos_pkg/chazos-config/
+    cp chazos_configs/bin/gui chazos_pkg/chazos-config/
+    cp chazos_configs/nvidia/nvidia-wayland.sh chazos_pkg/chazos-config/
+    cp chazos_configs/nvidia/nvidia.conf chazos_pkg/chazos-config/
 
     echo "--- Processing local $PKG ---"
     cd "$HOME/workspace/chazos/chazos_pkg/$PKG"
