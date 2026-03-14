@@ -1,49 +1,44 @@
-# Chazos
+# Chazos: The Terminal-as-OS Multiplexer
 
-A Zellij-inspired terminal OS built on Arch Linux.
+Chazos is a specialized Arch Linux distribution where the window manager (Sway) is configured to behave like a system-wide terminal multiplexer (mimicking Zellij's modal workflow). It boots directly into a high-performance terminal (Kitty), making the entire OS feel like a single, cohesive terminal environment.
 
-## Core Philosophy
-Chazos is designed for terminal-first users who want a multiplexer-like experience at the OS level. Instead of a traditional Desktop Environment or a bare TTY, Chazos uses Sway as a thin, modal wrapper that mimics the workflow of Zellij. It boots directly into a Kitty terminal and provides a modal interface for managing windows and workspaces.
+## 📋 Key Features
+- **Modal Workflow:** Uses Sway "modes" (Super+P for Pane, Super+T for Tab) to provide a Zellij-like interface for managing windows and workspaces.
+- **Terminal Hub:** Boots directly into Kitty, which serves as the primary interface for all system interactions.
+- **Modern CLI Stack:** Includes a curated set of modern tools (`fzf`, `ripgrep`, `eza`, `bat`, `btop`, `zoxide`, `dust`, `lazygit`, `yay`).
+- **Nvidia Support:** Pre-configured for Nvidia proprietary drivers with Wayland compatibility.
 
-## Key Features
-- **Base:** Arch Linux
-- **Modal Workflow:** Sway modes configured for Zellij-like shortcuts (Super+P for panes, Super+T for tabs).
-- **Terminal Hub:** Boots directly into a high-performance Kitty terminal session.
-- **Hardware:** Automated Nvidia detection and configuration.
-- **Networking:** NetworkManager enabled by default.
+## 🏗️ Project Structure
+- `chazos_configs/`: **The Source of Truth.** All core configuration files (Sway, Kitty, Waybar, etc.) are managed here.
+- `chazos_pkg/`: Contains the `PKGBUILD` for our internal `chazos-config` package, which bundles the files from `chazos_configs/`.
+- `chazos_profile/`: The Archiso profile directory.
+    - `airootfs/`: Files specific to the Live ISO environment (e.g., installer scripts, ISO-only startup configs).
+    - `custom_repo/`: A local pacman repository used to store our internal packages and AUR binaries.
+    - `packages.x86_64`: List of packages included in the ISO.
+- `build.sh`: Script to generate the final ISO using `mkarchiso`.
+- `update-custom-repo.sh`: Script to build internal packages and refresh the local repository database.
 
-## Local Testing
-Requires `archiso` and `qemu-desktop`:
-```bash
-./test-iso.sh
-```
+## 🛠️ How it Works
+Chazos uses a **Package-First Configuration** strategy. Instead of copying raw files into the ISO, all configurations are bundled into an Arch Linux package (`chazos-config`).
 
-## Local Building
+1. **Configuration:** Edits are made in the `chazos_configs/` directory.
+2. **Packaging:** `update-custom-repo.sh` syncs these configs into a package and builds it into the local `custom_repo`.
+3. **Build:** `build.sh` runs `mkarchiso`, which pulls `chazos-config` from the local repo and installs it into the ISO image.
+4. **Installation:** The `chazos-install` script ensures that the installed system also has the `custom_repo` and `chazos-config` package, keeping the installed OS perfectly in sync with the ISO.
 
-### Updating Custom Packages (yay)
-If you want to ensure the latest version of `yay` is baked into the ISO, run this helper script first:
-```bash
-./update-custom-repo.sh
-```
-
-To build a fresh Chazos ISO on an Arch Linux host, you will need `archiso` installed:
-
-```bash
-sudo pacman -S archiso
-```
-
-### Build Process
-The build process requires root privileges and approximately 15GB of free space in your working directory.
-
+## 🚀 Building and Testing
+1. **Refresh Packages:**
    ```bash
+   ./update-custom-repo.sh
    ```
-
-2. **Start the build script:**
+2. **Build the ISO:**
    ```bash
    ./build.sh
    ```
+3. **Test in QEMU:**
+   ```bash
+   ./test-iso.sh
+   ```
 
-The final ISO will be placed in the `out/` directory.
-
-## CI/CD
-Built automatically via GitHub Actions. Download the latest ISO from the 'Actions' tab artifacts.
+---
+*Built with Archiso and a passion for the command line.*

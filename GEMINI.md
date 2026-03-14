@@ -12,6 +12,9 @@ Build a specialized Arch Linux ISO where Sway is configured to mimic Zellij's mo
 
 ## Technical Specifics
 - **Profile Path:** `chazos_profile/`
-- **Custom Repo:** Local repository in `chazos_profile/custom_repo` used to inject AUR packages like `yay-bin`.
+- **Configuration Source:** `chazos_configs/` (Source of truth for the `chazos-config` package)
+- **Custom Repo:** Local repository in `chazos_profile/custom_repo` used to inject AUR packages and our internal `chazos-config` package.
 - **Primary Terminal:** Kitty
-- **Kiosk Config:** `/etc/skel/.config/sway/chazos.conf` (formerly minimal-kiosk)
+- **Kiosk Config:** 
+    - `/etc/skel/.config/sway/chazos.conf` (Installed via `chazos-config` package)
+    - `/etc/sway/config.d/99-chazos-iso.conf` (ISO-only startup override for the welcome message)
