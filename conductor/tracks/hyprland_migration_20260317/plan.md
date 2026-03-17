@@ -12,10 +12,10 @@
 - [x] Task: Conductor - User Manual Verification 'Phase 2: Hyprland Migration' (Protocol in workflow.md) (a9c63e4)
 
 ## Phase 3: Retro-TUI Welcome Experience
-- [ ] Task: Design ASCII art banners for the welcome screen.
-- [ ] Task: Write functional tests for the `chazos-welcome` script (e.g., exit code, output format).
-- [ ] Task: Implement the `chazos-welcome` script with text-based animations in `chazos_configs/bin/`.
-- [ ] Task: Configure Hyprland to launch Kitty with the `chazos-welcome` script on startup.
+- [x] Task: Design ASCII art banners for the welcome screen. (6229972)
+- [x] Task: Write functional tests for the `chazos-welcome` script (e.g., exit code, output format). (c0e9638)
+- [x] Task: Implement the `chazos-welcome` script with text-based animations in `chazos_configs/bin/`. (63f1702)
+- [x] Task: Configure Hyprland to launch Kitty with the `chazos-welcome` script on startup. (f0496f6)
 - [ ] Task: Conductor - User Manual Verification 'Phase 3: Retro-TUI Welcome Experience' (Protocol in workflow.md)
 
 ## Phase 4: Packaging and ISO Integration
