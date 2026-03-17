@@ -16,7 +16,7 @@ This phase focuses on correcting the repository paths and cleaning up the `profi
 ## Phase 2: Update GitHub Action Workflow
 This phase focuses on updating `build.yml` to correctly set up the environment and build all necessary packages.
 
-- [ ] Task: Update `build.yml` to include `sudo` and correct `pacman-key` sequence
+- [x] Task: Update `build.yml` to include `sudo` and correct `pacman-key` sequence 13e6118
     - [ ] Add `sudo` to the dependency installation step.
     - [ ] Move `pacman-key --init` and `--populate archlinux` to before `pacman -Syu`.
 - [ ] Task: Update `build.yml` to build `chazos-config`
