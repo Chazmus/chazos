@@ -18,9 +18,9 @@
 - [x] Task: Configure Hyprland to launch Kitty with the `chazos-welcome` script on startup. (f0496f6)
 - [x] Task: Conductor - User Manual Verification 'Phase 3: Retro-TUI Welcome Experience' (Protocol in workflow.md) (9a68e70)
 
-## Phase 4: Packaging and ISO Integration
+## Phase 4: Packaging and ISO Integration [checkpoint: cd081cd]
 - [x] Task: Update the `PKGBUILD` in `chazos_pkg/chazos-config/` to include Hyprland and the welcome script. (8746ef1)
 - [x] Task: Update `chazos_profile/packages.x86_64` to replace `sway` with `hyprland` and dependencies. (30e9a1c)
 - [x] Task: Build the updated `chazos-config` package and refresh the local repository. (db1b571)
 - [x] Task: Build the ISO and verify the Hyprland migration in QEMU. (b084459)
-- [ ] Task: Conductor - User Manual Verification 'Phase 4: Packaging and ISO Integration' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 4: Packaging and ISO Integration' (Protocol in workflow.md) (cd081cd)
