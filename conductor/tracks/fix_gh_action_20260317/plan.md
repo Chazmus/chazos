@@ -5,7 +5,7 @@ This phase focuses on correcting the repository paths and cleaning up the `profi
 
 - [x] Task: Correct repository path in `chazos_profile/pacman.conf` c07839b
     - [ ] Update `Server = file://{{PWD}}/custom_repo` to `Server = file://{{PWD}}/chazos_profile/custom_repo`
-- [ ] Task: Cleanup `chazos_profile/profiledef.sh` permissions
+- [x] Task: Cleanup `chazos_profile/profiledef.sh` permissions b585b5d
     - [ ] Remove `["/root/.automated_script.sh"]="0:0:755"`
     - [ ] Remove entries for files installed via `chazos-config` (`chazos-install`, `chazos-welcome`, `gui`, `nvidia-wayland.sh`, `99-chazos-iso.conf`)
     - [ ] Ensure only files existing in `chazos_profile/airootfs/` are listed.
