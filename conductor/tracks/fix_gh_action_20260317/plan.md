@@ -9,7 +9,7 @@ This phase focuses on correcting the repository paths and cleaning up the `profi
     - [ ] Remove `["/root/.automated_script.sh"]="0:0:755"`
     - [ ] Remove entries for files installed via `chazos-config` (`chazos-install`, `chazos-welcome`, `gui`, `nvidia-wayland.sh`, `99-chazos-iso.conf`)
     - [ ] Ensure only files existing in `chazos_profile/airootfs/` are listed.
-- [ ] Task: Verify `profiledef.sh` consistency
+- [x] Task: Verify `profiledef.sh` consistency b585b5d
     - [ ] Run a script to check that all files in `profiledef.sh` exist in `chazos_profile/airootfs/`.
 - [ ] Task: Conductor - User Manual Verification 'Correct Configuration & Cleanup' (Protocol in workflow.md)
 
