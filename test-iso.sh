@@ -6,6 +6,13 @@ if [ -z "$ISO_FILE" ]; then
     echo "Error: No ISO found in out/ directory."
     exit 1
 fi
+# Handle headless mode
+if [[ "$1" == "--headless" ]]; then
+    DISPLAY_OPTS="-nographic"
+else
+    DISPLAY_OPTS="-display gtk,grab-on-hover=on"
+fi
+
 echo "Launching $ISO_FILE in QEMU (logs to serial-boot.log)..."
 # Use direct QEMU call for better control over memory and keyboard grabbing
 # -display gtk,grab-on-hover=on is helpful for Sway/Wayland testing
@@ -15,7 +22,7 @@ qemu-system-x86_64 \
     -m "${QEMU_RAM:-4096}" \
     -smp 4 \
     -drive file="$ISO_FILE",media=cdrom,readonly=on \
-    -display gtk,grab-on-hover=on \
+    $DISPLAY_OPTS \
     -vga virtio \
     -cpu host \
     -serial stdio \

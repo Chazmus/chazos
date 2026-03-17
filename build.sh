@@ -15,8 +15,12 @@ fi
 
 # 1.5 Run tests before building
 echo "Running pre-build tests..."
-if [ -f "tests/run-all.sh" ]; then
-    bash tests/run-all.sh || { echo "Tests failed! Aborting build."; exit 1; }
+if [ "$SKIP_TESTS" != "true" ]; then
+    if [ -f "tests/run-all.sh" ]; then
+        bash tests/run-all.sh || { echo "Tests failed! Aborting build."; exit 1; }
+    fi
+else
+    echo "Skipping tests as requested."
 fi
 
 # 2. Cleanup
