@@ -30,7 +30,7 @@ jobs:
           # makepkg cannot run as root, create a build user
           useradd -m builduser
           chown -R builduser:builduser .
-          sudo -u builduser makepkg -sc --noconfirm
+          sudo -u builduser makepkg -scf --noconfirm
           mv *.pkg.tar.zst ../chazos_profile/custom_repo/
           cd ..
           repo-add chazos_profile/custom_repo/custom.db.tar.gz chazos_profile/custom_repo/*.pkg.tar.zst
@@ -40,7 +40,7 @@ jobs:
           cd chazos_pkg/chazos-config
           # Use the existing builduser
           chown -R builduser:builduser .
-          sudo -u builduser makepkg -sc --noconfirm
+          sudo -u builduser makepkg -scf --noconfirm
           cp *.pkg.tar.zst ../../chazos_profile/custom_repo/
           cd ../..
           # Update the repo database
