@@ -35,6 +35,17 @@ jobs:
           cd ..
           repo-add chazos_profile/custom_repo/custom.db.tar.gz chazos_profile/custom_repo/*.pkg.tar.zst
 
+      - name: Build chazos-config
+        run: |
+          cd chazos_pkg/chazos-config
+          # Use the existing builduser
+          chown -R builduser:builduser .
+          sudo -u builduser makepkg -sc --noconfirm
+          cp *.pkg.tar.zst ../../chazos_profile/custom_repo/
+          cd ../..
+          # Update the repo database
+          repo-add chazos_profile/custom_repo/custom.db.tar.gz chazos_profile/custom_repo/chazos-config-*.pkg.tar.zst
+
       - name: Build ISO
         run: |
           # Use a custom pacman.conf for the build to use the local repo

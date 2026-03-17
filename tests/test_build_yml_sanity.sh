@@ -30,4 +30,12 @@ else
     fi
 fi
 
+# 3. Check for chazos-config build step
+if grep -q "Build chazos-config" "$FILE"; then
+    echo "Success: 'Build chazos-config' step found."
+else
+    echo "Failure: 'Build chazos-config' step not found."
+    FAILED=1
+fi
+
 exit $FAILED
