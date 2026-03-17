@@ -22,8 +22,11 @@ amd-ucode
 networkmanager
 
 # Display / GUI Wrapper
-sway
-swaybg
+hyprland
+xdg-desktop-portal-hyprland
+xdg-desktop-portal-gtk
+qt5-wayland
+qt6-wayland
 polkit-gnome
 wayland
 xorg-xwayland
