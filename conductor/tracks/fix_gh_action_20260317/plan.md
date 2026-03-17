@@ -3,7 +3,7 @@
 ## Phase 1: Correct Configuration & Cleanup
 This phase focuses on correcting the repository paths and cleaning up the `profiledef.sh` permissions to satisfy `mkarchiso`'s requirements.
 
-- [ ] Task: Correct repository path in `chazos_profile/pacman.conf`
+- [x] Task: Correct repository path in `chazos_profile/pacman.conf` c07839b
     - [ ] Update `Server = file://{{PWD}}/custom_repo` to `Server = file://{{PWD}}/chazos_profile/custom_repo`
 - [ ] Task: Cleanup `chazos_profile/profiledef.sh` permissions
     - [ ] Remove `["/root/.automated_script.sh"]="0:0:755"`
