@@ -6,9 +6,9 @@
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Preparation and Scaffolding' (Protocol in workflow.md) (a33d0f2)
 
 ## Phase 2: Hyprland Migration
-- [ ] Task: Write functional tests for Hyprland keybindings and window management.
-- [ ] Task: Implement keybindings and window rules in `hyprland.conf`.
-- [ ] Task: Configure Nvidia-specific environment variables for Hyprland.
+- [x] Task: Write functional tests for Hyprland keybindings and window management. (f4ca4c3)
+- [x] Task: Implement keybindings and window rules in `hyprland.conf`. (dff7525)
+- [x] Task: Configure Nvidia-specific environment variables for Hyprland. (069cbbf)
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: Hyprland Migration' (Protocol in workflow.md)
 
 ## Phase 3: Retro-TUI Welcome Experience
