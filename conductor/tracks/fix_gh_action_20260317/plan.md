@@ -29,7 +29,7 @@ This phase focuses on updating `build.yml` to correctly set up the environment a
 ## Phase 3: Verification & Finalization
 This phase focuses on verifying the fixes by triggering the GitHub Action.
 
-- [ ] Task: Trigger GitHub Action and monitor build
+- [~] Task: Trigger GitHub Action and monitor build
     - [ ] Push changes and check the Action status.
 - [ ] Task: Verify ISO artifact
     - [ ] Ensure the artifact is generated and contains the expected configurations.

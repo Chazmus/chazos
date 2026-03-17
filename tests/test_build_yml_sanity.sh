@@ -38,4 +38,13 @@ else
     FAILED=1
 fi
 
+# 4. Check for correct sed command
+# It should use | as delimiter because $(pwd) contains /
+if grep -q "sed -i \"s|{{PWD}}|" "$FILE"; then
+    echo "Success: Correct sed delimiter used."
+else
+    echo "Failure: Incorrect sed delimiter used or command missing."
+    FAILED=1
+fi
+
 exit $FAILED
