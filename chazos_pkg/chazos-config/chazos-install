@@ -11,9 +11,51 @@ echo "It uses the official 'archinstall' tool to handle"
 echo "partitioning, networking, and system configuration."
 echo ""
 echo "Press ANY KEY to start the installer..."
-read -n 1 -s
+read -r -n 1 -s
 
 # Launch archinstall
-# We'll eventually be able to pass a --config file here to 
-# pre-set Chazos-specific defaults.
 sudo archinstall
+
+# Post-installation logic
+echo "--------------------------------------------------"
+echo " Applying Chazos-specific configurations..."
+echo "--------------------------------------------------"
+
+# archinstall usually mounts to /mnt
+TARGET="/mnt"
+
+if [ -d "$TARGET/etc" ]; then
+    echo "Detected installed system at $TARGET"
+    
+    # 1. Copy the local custom repository to the target
+    echo "Copying custom repository to target disk..."
+    mkdir -p "$TARGET/opt/chazos"
+    cp -r /run/archiso/bootmnt/chazos/custom_repo "$TARGET/opt/chazos/" 2>/dev/null || \
+    cp -r /chazos_profile/custom_repo "$TARGET/opt/chazos/" # Fallback for development
+
+    # 2. Inject custom repo into target's pacman.conf
+    if ! grep -q "\[custom\]" "$TARGET/etc/pacman.conf"; then
+        echo "Updating $TARGET/etc/pacman.conf..."
+        cat >> "$TARGET/etc/pacman.conf" <<EOF
+
+[custom]
+SigLevel = Optional TrustAll
+Server = file:///opt/chazos/custom_repo
+EOF
+    fi
+
+    # 3. Install chazos-config in the target
+    echo "Installing Chazos configuration package..."
+    arch-chroot "$TARGET" pacman -Sy --noconfirm chazos-config
+
+    echo "--------------------------------------------------"
+    echo " Chazos installation is complete!"
+    echo " Your system is now configured to match the ISO."
+    echo "--------------------------------------------------"
+else
+    echo "Error: Could not find the installation target at $TARGET."
+    echo "You may need to manually apply Chazos configurations."
+fi
+
+echo "Press ANY KEY to reboot or return to shell..."
+read -r -n 1 -s

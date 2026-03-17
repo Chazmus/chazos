@@ -3,15 +3,15 @@
 pkgname = chazos-config
 pkgbase = chazos-config
 xdata = pkgtype=pkg
-pkgver = 1.0.0-1
-pkgdesc = Core configuration files and helper scripts for Chazos
+pkgver = 1.1.0-2
+pkgdesc = Core configuration files and helper scripts for Chazos (Hyprland Edition)
 url = https://github.com/cbailey/chazos
-builddate = 1773498743
+builddate = 1773771712
 packager = Unknown Packager
-size = 10499
+size = 13466
 arch = any
 license = MIT
-depend = sway
+depend = hyprland
 depend = kitty
 depend = waybar
 depend = fish

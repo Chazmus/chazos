@@ -58,8 +58,10 @@ for PKG in "${LOCAL_PACKAGES[@]}"; do
     cp chazos_configs/waybar/top.jsonc chazos_pkg/chazos-config/waybar-top.jsonc
     cp chazos_configs/waybar/bottom.jsonc chazos_pkg/chazos-config/waybar-bottom.jsonc
     cp chazos_configs/fish/config.fish chazos_pkg/chazos-config/
+    cp chazos_configs/shell/.zlogin chazos_pkg/chazos-config/
     cp chazos_configs/bin/chazos-install chazos_pkg/chazos-config/
     cp chazos_configs/bin/chazos-welcome chazos_pkg/chazos-config/
+    cp chazos_configs/bin/chazos-automated-script chazos_pkg/chazos-config/
     cp chazos_configs/bin/gui chazos_pkg/chazos-config/
     cp chazos_configs/nvidia/nvidia-wayland.sh chazos_pkg/chazos-config/
     cp chazos_configs/nvidia/nvidia.conf chazos_pkg/chazos-config/

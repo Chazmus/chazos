@@ -1,19 +1,76 @@
 #!/bin/bash
+# Chazos Welcome Script
+# Provides a retro-TUI welcome experience with animations.
+
+BANNER_PATH="/etc/skel/.config/chazos/banner.txt"
+# Fallback for local development
+if [ ! -f "$BANNER_PATH" ]; then
+    BANNER_PATH="$(dirname "$0")/../assets/banner.txt"
+fi
+
+type_text() {
+    local text="$1"
+    local no_anim=false
+    
+    # Check all arguments for --no-animation
+    for arg in "$@"; do
+        if [[ "$arg" == "--no-animation" ]]; then
+            no_anim=true
+        fi
+    done
+
+    if [ "$no_anim" = true ]; then
+        echo -e "$text"
+        return
+    fi
+
+    local delay=0.02
+    for (( i=0; i<${#text}; i++ )); do
+        echo -n "${text:$i:1}"
+        sleep $delay
+    done
+    echo ""
+}
+
 clear
-echo -e "\e[1;34m--------------------------------------------------------------------------\e[0m"
-echo -e "\e[1;36m                     Welcome to Chazos (Terminal-First OS)\e[0m"
-echo -e "\e[1;34m--------------------------------------------------------------------------\e[0m"
+
+# Display Banner (Green for Retro feel)
+if [ -f "$BANNER_PATH" ]; then
+    echo -e "\e[1;32m"
+    cat "$BANNER_PATH"
+    echo -e "\e[0m"
+else
+    echo -e "\e[1;36mWelcome to Chazos (Terminal-First OS)\e[0m"
+fi
+
 echo ""
-echo -e "You are currently in the \e[1;32mLive Environment\e[0m."
+type_text "System Initialization Complete..." "$@"
+type_text "Mode: Live Environment" "$@"
 echo ""
-echo -e "To install Chazos permanently to your disk, run:"
-echo -e "    \e[1;33mchazos-install\e[0m"
+type_text "To install Chazos permanently, run: chazos-install" "$@"
 echo ""
-echo -e "Quick Modal Tips (Zellij-like):"
-echo -e "  - \e[1;35mSuper+p\e[0m: Pane Mode (n: new, d: down, r: right, x: close)"
-echo -e "  - \e[1;35mSuper+t\e[0m: Tab Mode (n: new, h/l: switch, x: close)"
+type_text "Quick Modal Tips (Hyprland):" "$@"
+type_text "  - Super+P: Pane Mode (n: new, d: split, x: close)" "$@"
+type_text "  - Super+T: Tab Mode (n: new, h/l: switch, x: close)" "$@"
 echo ""
-echo -e "\e[1;34m--------------------------------------------------------------------------\e[0m"
+echo -e "\e[1;32m--------------------------------------------------------------------------\e[0m"
 echo ""
-# Start a shell so the terminal stays open
-exec zsh
+
+# Check all arguments for --no-shell
+no_shell=false
+for arg in "$@"; do
+    if [[ "$arg" == "--no-shell" ]]; then
+        no_shell=true
+    fi
+done
+
+if [ "$no_shell" = true ]; then
+    exit 0
+fi
+
+# Start fish shell
+if command -v fish >/dev/null 2>&1; then
+    exec fish
+else
+    exec bash
+fi

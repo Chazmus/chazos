@@ -4,8 +4,12 @@ if grep -Fqa 'accessibility=' /proc/cmdline &> /dev/null; then
 fi
 
 if [[ $(tty) == "/dev/tty1" ]]; then
-    ~/.automated_script.sh
+    # Run the automated script handler (handles script= parameter)
+    if command -v chazos-automated-script >/dev/null 2>&1; then
+        chazos-automated-script
+    fi
+    
     # Automatically start the Chazos GUI session
-    # This will start Sway with our Zellij-like config.
+    # This will start Hyprland.
     exec gui kitty
 fi

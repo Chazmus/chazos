@@ -2,7 +2,7 @@
 # shellcheck shell=bash
 pkgname=chazos-config
 pkgver=1.1.0
-pkgrel=1
+pkgrel=2
 pkgdesc="Core configuration files and helper scripts for Chazos (Hyprland Edition)"
 arch=('any')
 url="https://github.com/cbailey/chazos"
@@ -17,13 +17,15 @@ source=(
     'waybar-top.jsonc'
     'waybar-bottom.jsonc'
     'config.fish'
+    '.zlogin'
     'chazos-install'
     'chazos-welcome'
+    'chazos-automated-script'
     'gui'
     'nvidia-wayland.sh'
     'nvidia.conf'
 )
-sha256sums=('SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP')
+sha256sums=('SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP')
 
 package() {
     # 1. Configs for /etc/skel
@@ -35,10 +37,12 @@ package() {
     install -Dm644 waybar-top.jsonc "$pkgdir/etc/skel/.config/waybar/top.jsonc"
     install -Dm644 waybar-bottom.jsonc "$pkgdir/etc/skel/.config/waybar/bottom.jsonc"
     install -Dm644 config.fish "$pkgdir/etc/skel/.config/fish/config.fish"
+    install -Dm644 .zlogin "$pkgdir/etc/skel/.zlogin"
 
     # 2. Binaries
     install -Dm755 chazos-install "$pkgdir/usr/local/bin/chazos-install"
     install -Dm755 chazos-welcome "$pkgdir/usr/local/bin/chazos-welcome"
+    install -Dm755 chazos-automated-script "$pkgdir/usr/local/bin/chazos-automated-script"
     install -Dm755 gui "$pkgdir/usr/local/bin/gui"
 
     # 3. Nvidia Support
