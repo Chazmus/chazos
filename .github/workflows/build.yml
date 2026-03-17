@@ -17,10 +17,10 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pacman -Syu --noconfirm archiso base-devel git
-          # Initialize pacman keys for the container
+          # Initialize pacman keys for the container before installing packages
           pacman-key --init
           pacman-key --populate archlinux
+          pacman -Syu --noconfirm archiso base-devel git sudo
 
       - name: Setup Custom Repo & Build Yay
         run: |
