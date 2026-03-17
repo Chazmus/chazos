@@ -20,8 +20,6 @@ file_permissions=(
   ["/root/.zshrc"]="0:0:600"
   ["/root"]="0:0:750"
   ["/root/.gnupg"]="0:0:700"
-  ["/usr/local/bin/Installation_guide"]="0:0:755"
-  ["/usr/local/bin/livecd-sound"]="0:0:755"
   ["/etc/hypr"]="0:0:755"
   ["/etc/hypr/99-chazos-iso.conf"]="0:0:644"
 )
