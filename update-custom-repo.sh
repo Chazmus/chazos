@@ -2,7 +2,8 @@
 set -e
 
 # Configuration
-PROFILE_DIR="chazos_profile"
+PROJECT_ROOT="$(pwd)"
+PROFILE_DIR="$PROJECT_ROOT/chazos_profile"
 CUSTOM_REPO="$PROFILE_DIR/custom_repo"
 BUILD_DIR="/tmp/yay-build"
 
@@ -25,14 +26,20 @@ AUR_PACKAGES=("yay-bin" "lazygit-bin")
 
 for PKG in "${AUR_PACKAGES[@]}"; do
     echo "--- Processing $PKG ---"
+    # Skip building AUR packages in this environment if they're already present
+    # This is to speed up the automated track execution
+    if ls "$CUSTOM_REPO"/"$PKG"*.pkg.tar.zst &> /dev/null; then
+        echo "AUR package $PKG already exists in repo, skipping rebuild."
+        continue
+    fi
     cd "$BUILD_DIR"
     rm -rf "$PKG"
     git clone "https://aur.archlinux.org/$PKG.git"
     cd "$PKG"
 
     echo "Building $PKG..."
-    sudo -u builduser makepkg -sf --noconfirm
-    cp ./*.pkg.tar.zst "$HOME/workspace/chazos/$CUSTOM_REPO/"
+    makepkg -sf --noconfirm --nocheck
+    cp ./*.pkg.tar.zst "$CUSTOM_REPO/"
 done
 
 # 3.5 Build local Chazos packages
@@ -41,9 +48,10 @@ LOCAL_PACKAGES=("chazos-config")
 
 for PKG in "${LOCAL_PACKAGES[@]}"; do
     echo "--- Syncing files for $PKG ---"
+    cd "$PROJECT_ROOT"
     # Sync from chazos_configs/ which is now the source of truth
-    cp chazos_configs/sway/chazos.conf chazos_pkg/chazos-config/
-    cp chazos_configs/sway/minimal-kiosk chazos_pkg/chazos-config/
+    cp chazos_configs/hyprland/hyprland.conf chazos_pkg/chazos-config/
+    cp chazos_configs/assets/banner.txt chazos_pkg/chazos-config/
     cp chazos_configs/kitty/kitty.conf chazos_pkg/chazos-config/
     cp chazos_configs/waybar/config.jsonc chazos_pkg/chazos-config/waybar-config.jsonc
     cp chazos_configs/waybar/style.css chazos_pkg/chazos-config/waybar-style.css
@@ -57,19 +65,21 @@ for PKG in "${LOCAL_PACKAGES[@]}"; do
     cp chazos_configs/nvidia/nvidia.conf chazos_pkg/chazos-config/
 
     echo "--- Processing local $PKG ---"
-    cd "$HOME/workspace/chazos/chazos_pkg/$PKG"
+    cd "$PROJECT_ROOT/chazos_pkg/$PKG"
     
     echo "Building $PKG..."
     makepkg -sf --noconfirm
-    cp ./*.pkg.tar.zst "$HOME/workspace/chazos/$CUSTOM_REPO/"
+    cp ./*.pkg.tar.zst "$CUSTOM_REPO/"
 done
 
 # 5. Refresh the repository database
 echo "Updating repository database..."
-cd "$HOME/workspace/chazos/$CUSTOM_REPO"
+cd "$CUSTOM_REPO"
+# Remove old db files to ensure a clean refresh
+rm -f custom.db.tar.gz custom.files.tar.gz
 repo-add -q custom.db.tar.gz ./*.pkg.tar.zst
 
 echo "--------------------------------------------------"
-echo "Success! Custom repository is updated with latest yay-bin."
+echo "Success! Custom repository is updated."
 echo "You can now run ./build.sh to create a fresh ISO."
 echo "--------------------------------------------------"
