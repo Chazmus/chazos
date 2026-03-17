@@ -1,0 +1,76 @@
+#!/bin/bash
+# Chazos Welcome Script
+# Provides a retro-TUI welcome experience with animations.
+
+BANNER_PATH="/etc/skel/.config/chazos/banner.txt"
+# Fallback for local development
+if [ ! -f "$BANNER_PATH" ]; then
+    BANNER_PATH="$(dirname "$0")/../assets/banner.txt"
+fi
+
+type_text() {
+    local text="$1"
+    local no_anim=false
+    
+    # Check all arguments for --no-animation
+    for arg in "$@"; do
+        if [[ "$arg" == "--no-animation" ]]; then
+            no_anim=true
+        fi
+    done
+
+    if [ "$no_anim" = true ]; then
+        echo -e "$text"
+        return
+    fi
+
+    local delay=0.02
+    for (( i=0; i<${#text}; i++ )); do
+        echo -n "${text:$i:1}"
+        sleep $delay
+    done
+    echo ""
+}
+
+clear
+
+# Display Banner (Green for Retro feel)
+if [ -f "$BANNER_PATH" ]; then
+    echo -e "\e[1;32m"
+    cat "$BANNER_PATH"
+    echo -e "\e[0m"
+else
+    echo -e "\e[1;36mWelcome to Chazos (Terminal-First OS)\e[0m"
+fi
+
+echo ""
+type_text "System Initialization Complete..." "$@"
+type_text "Mode: Live Environment" "$@"
+echo ""
+type_text "To install Chazos permanently, run: chazos-install" "$@"
+echo ""
+type_text "Quick Modal Tips (Hyprland):" "$@"
+type_text "  - Super+P: Pane Mode (n: new, d: split, x: close)" "$@"
+type_text "  - Super+T: Tab Mode (n: new, h/l: switch, x: close)" "$@"
+echo ""
+echo -e "\e[1;32m--------------------------------------------------------------------------\e[0m"
+echo ""
+
+# Check all arguments for --no-shell
+no_shell=false
+for arg in "$@"; do
+    if [[ "$arg" == "--no-shell" ]]; then
+        no_shell=true
+    fi
+done
+
+if [ "$no_shell" = true ]; then
+    exit 0
+fi
+
+# Start fish shell
+if command -v fish >/dev/null 2>&1; then
+    exec fish
+else
+    exec bash
+fi

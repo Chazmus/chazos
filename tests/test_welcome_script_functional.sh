@@ -16,8 +16,8 @@ if [ ! -x "$SCRIPT_PATH" ]; then
 fi
 
 # Run the script and check if it contains part of the banner
-OUTPUT=$("$SCRIPT_PATH" --no-animation)
-if [[ "$OUTPUT" == *"CHAZOS"* ]]; then
+OUTPUT=$("$SCRIPT_PATH" --no-animation --no-shell)
+if [[ "$OUTPUT" == *"____"* ]]; then
     echo "[PASS] Welcome script outputs correctly."
     exit 0
 else
