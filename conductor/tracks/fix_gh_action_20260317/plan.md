@@ -19,7 +19,7 @@ This phase focuses on updating `build.yml` to correctly set up the environment a
 - [x] Task: Update `build.yml` to include `sudo` and correct `pacman-key` sequence 13e6118
     - [ ] Add `sudo` to the dependency installation step.
     - [ ] Move `pacman-key --init` and `--populate archlinux` to before `pacman -Syu`.
-- [ ] Task: Update `build.yml` to build `chazos-config`
+- [x] Task: Update `build.yml` to build `chazos-config` e46d64b
     - [ ] Add a step to build the `chazos-config` package from `chazos_pkg/chazos-config`.
     - [ ] Add the built `chazos-config` package to the custom repository using `repo-add`.
 - [ ] Task: Correct `sed` command in `build.yml`
