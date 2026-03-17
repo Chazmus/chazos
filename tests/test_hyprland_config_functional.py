@@ -10,7 +10,7 @@ def test_hyprland_keybindings_exist():
 
     # Define the required keybindings
     required_keybindings = [
-        r"bind\s*=\s*\$mainMod,\s*RETURN,\s*exec,\s*kitty",
+        r"bind\s*=\s*\$mainMod,\s*RETURN,\s*exec,\s*\$term",
         r"bind\s*=\s*\$mainMod,\s*Q,\s*killactive",
         r"bind\s*=\s*\$mainMod,\s*M,\s*exit",
     ]
@@ -27,12 +27,12 @@ def test_hyprland_modal_system_logic():
 
     # The current config is basic, so we expect these to FAIL initially.
     required_modes = [
-        "submap=pane",
-        "submap=tab",
+        r"submap\s*=\s*pane",
+        r"submap\s*=\s*tab",
     ]
 
     for mode in required_modes:
-        assert mode in config_content, f"Required mode '{mode}' NOT found in {config_path}."
+        assert re.search(mode, config_content), f"Required mode '{mode}' NOT found in {config_path}."
 
 if __name__ == "__main__":
     try:
