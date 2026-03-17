@@ -5,11 +5,11 @@
 - [x] Task: Create a basic Hyprland configuration file (`hyprland.conf`) in `chazos_configs/hyprland/`. (8859076)
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Preparation and Scaffolding' (Protocol in workflow.md) (a33d0f2)
 
-## Phase 2: Hyprland Migration
+## Phase 2: Hyprland Migration [checkpoint: a9c63e4]
 - [x] Task: Write functional tests for Hyprland keybindings and window management. (f4ca4c3)
 - [x] Task: Implement keybindings and window rules in `hyprland.conf`. (dff7525)
 - [x] Task: Configure Nvidia-specific environment variables for Hyprland. (069cbbf)
-- [ ] Task: Conductor - User Manual Verification 'Phase 2: Hyprland Migration' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 2: Hyprland Migration' (Protocol in workflow.md) (a9c63e4)
 
 ## Phase 3: Retro-TUI Welcome Experience
 - [ ] Task: Design ASCII art banners for the welcome screen.
