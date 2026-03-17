@@ -1,16 +1,16 @@
 # Maintainer: Chazos <https://github.com/cbailey/chazos>
 # shellcheck shell=bash
 pkgname=chazos-config
-pkgver=1.0.0
+pkgver=1.1.0
 pkgrel=1
-pkgdesc="Core configuration files and helper scripts for Chazos"
+pkgdesc="Core configuration files and helper scripts for Chazos (Hyprland Edition)"
 arch=('any')
 url="https://github.com/cbailey/chazos"
 license=('MIT')
-depends=('sway' 'kitty' 'waybar' 'fish' 'jq' 'dmenu' 'ttf-jetbrains-mono-nerd')
+depends=('hyprland' 'kitty' 'waybar' 'fish' 'jq' 'dmenu' 'ttf-jetbrains-mono-nerd')
 source=(
-    'chazos.conf'
-    'minimal-kiosk'
+    'hyprland.conf'
+    'banner.txt'
     'kitty.conf'
     'waybar-config.jsonc'
     'waybar-style.css'
@@ -27,8 +27,8 @@ sha256sums=('SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP
 
 package() {
     # 1. Configs for /etc/skel
-    install -Dm644 chazos.conf "$pkgdir/etc/skel/.config/sway/chazos.conf"
-    install -Dm644 minimal-kiosk "$pkgdir/etc/skel/.config/sway/minimal-kiosk"
+    install -Dm644 hyprland.conf "$pkgdir/etc/skel/.config/hypr/hyprland.conf"
+    install -Dm644 banner.txt "$pkgdir/etc/skel/.config/chazos/banner.txt"
     install -Dm644 kitty.conf "$pkgdir/etc/skel/.config/kitty/kitty.conf"
     install -Dm644 waybar-config.jsonc "$pkgdir/etc/skel/.config/waybar/config.jsonc"
     install -Dm644 waybar-style.css "$pkgdir/etc/skel/.config/waybar/style.css"
