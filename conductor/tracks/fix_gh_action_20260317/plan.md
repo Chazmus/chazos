@@ -22,7 +22,7 @@ This phase focuses on updating `build.yml` to correctly set up the environment a
 - [x] Task: Update `build.yml` to build `chazos-config` e46d64b
     - [ ] Add a step to build the `chazos-config` package from `chazos_pkg/chazos-config`.
     - [ ] Add the built `chazos-config` package to the custom repository using `repo-add`.
-- [ ] Task: Correct `sed` command in `build.yml`
+- [x] Task: Correct `sed` command in `build.yml` e46d64b
     - [ ] Ensure it correctly replaces `{{PWD}}` in `chazos_profile/pacman.conf`.
 - [ ] Task: Conductor - User Manual Verification 'Update GitHub Action Workflow' (Protocol in workflow.md)
 
