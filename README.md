@@ -40,5 +40,17 @@ Chazos uses a **Package-First Configuration** strategy. Instead of copying raw f
    ./test-iso.sh
    ```
 
+## 🧪 Testing
+Chazos uses a multi-layered testing strategy to ensure reliability:
+- **Linting:** `shellcheck` validates all shell scripts.
+- **Package Check:** `namcap` (if available) verifies the `chazos-config` package integrity.
+- **Integration:** Automated headless QEMU boot tests via `tests/integration.sh`.
+
+Run the full test suite manually:
+```bash
+./tests/run-all.sh
+```
+*Note: `build.sh` automatically runs these tests before every ISO build.*
+
 ---
 *Built with Archiso and a passion for the command line.*

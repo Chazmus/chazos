@@ -32,7 +32,7 @@ for PKG in "${AUR_PACKAGES[@]}"; do
 
     echo "Building $PKG..."
     sudo -u builduser makepkg -sf --noconfirm
-    cp *.pkg.tar.zst "$HOME/workspace/chazos/$CUSTOM_REPO/"
+    cp ./*.pkg.tar.zst "$HOME/workspace/chazos/$CUSTOM_REPO/"
 done
 
 # 3.5 Build local Chazos packages
@@ -61,13 +61,13 @@ for PKG in "${LOCAL_PACKAGES[@]}"; do
     
     echo "Building $PKG..."
     makepkg -sf --noconfirm
-    cp *.pkg.tar.zst "$HOME/workspace/chazos/$CUSTOM_REPO/"
+    cp ./*.pkg.tar.zst "$HOME/workspace/chazos/$CUSTOM_REPO/"
 done
 
 # 5. Refresh the repository database
 echo "Updating repository database..."
 cd "$HOME/workspace/chazos/$CUSTOM_REPO"
-repo-add -q custom.db.tar.gz *.pkg.tar.zst
+repo-add -q custom.db.tar.gz ./*.pkg.tar.zst
 
 echo "--------------------------------------------------"
 echo "Success! Custom repository is updated with latest yay-bin."

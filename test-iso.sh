@@ -1,6 +1,7 @@
 #!/bin/bash
+# shellcheck disable=SC2155
 export PATH="$(pwd)/bin:$PATH"
-ISO_FILE=$(ls -t out/*.iso 2>/dev/null | head -n 1)
+ISO_FILE=$(find out/ -maxdepth 1 -name "*.iso" -printf '%T@ %p\n' | sort -n | tail -1 | cut -f2- -d" ")
 if [ -z "$ISO_FILE" ]; then
     echo "Error: No ISO found in out/ directory."
     exit 1
@@ -11,7 +12,7 @@ echo "Launching $ISO_FILE in QEMU (logs to serial-boot.log)..."
 # -m 4G is usually minimum for building yay packages in RAM
 qemu-system-x86_64 \
     -enable-kvm \
-    -m ${QEMU_RAM:-4096} \
+    -m "${QEMU_RAM:-4096}" \
     -smp 4 \
     -drive file="$ISO_FILE",media=cdrom,readonly=on \
     -display gtk,grab-on-hover=on \

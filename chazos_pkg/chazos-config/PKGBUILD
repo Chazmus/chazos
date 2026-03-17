@@ -1,4 +1,5 @@
 # Maintainer: Chazos <https://github.com/cbailey/chazos>
+# shellcheck shell=bash
 pkgname=chazos-config
 pkgver=1.0.0
 pkgrel=1

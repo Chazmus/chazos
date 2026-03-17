@@ -18,3 +18,12 @@ Build a specialized Arch Linux ISO where Sway is configured to mimic Zellij's mo
 - **Kiosk Config:** 
     - `/etc/skel/.config/sway/chazos.conf` (Installed via `chazos-config` package)
     - `/etc/sway/config.d/99-chazos-iso.conf` (ISO-only startup override for the welcome message)
+
+    ## Testing & Quality Assurance
+    1. **Static Analysis:** `shellcheck` is used to lint all scripts in `chazos_configs/bin/`, `build.sh`, and other system scripts.
+    2. **Package Validation:** `namcap` is used to verify the integrity and structure of the `chazos-config` package.
+    3. **Pre-build Hook:** `build.sh` automatically runs all tests via `tests/run-all.sh` before generating the ISO.
+    4. **Integration Testing:**
+    - `tests/verify.sh`: Internal verification script for checking system state (Sway, Kitty, Configs).
+    - `tests/integration.sh`: Headless QEMU runner that uses a local HTTP server and `script=` kernel parameter to automate ISO verification.
+    - `05-chazos-test.conf`: Dedicated bootloader entry in `chazos_profile/efiboot/loader/entries/` for automated testing.

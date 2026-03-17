@@ -4,5 +4,5 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-- [ ] **Track: Migrate to Hyprland and implement retro-TUI welcome experience**
+- [~] **Track: Migrate to Hyprland and implement retro-TUI welcome experience**
   *Link: [./tracks/hyprland_migration_20260317/](./tracks/hyprland_migration_20260317/)*

@@ -1,8 +1,8 @@
 # Implementation Plan: Hyprland Migration and Retro-TUI Welcome
 
 ## Phase 1: Preparation and Scaffolding
-- [ ] Task: Install Hyprland and related dependencies on the development host for testing.
-- [ ] Task: Create a basic Hyprland configuration file (`hyprland.conf`) in `chazos_configs/hyprland/`.
+- [x] Task: Install Hyprland and related dependencies on the development host for testing. (4262c6a)
+- [x] Task: Create a basic Hyprland configuration file (`hyprland.conf`) in `chazos_configs/hyprland/`. (8859076)
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: Preparation and Scaffolding' (Protocol in workflow.md)
 
 ## Phase 2: Hyprland Migration

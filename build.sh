@@ -13,6 +13,12 @@ if ! command -v mkarchiso &> /dev/null; then
     exit 1
 fi
 
+# 1.5 Run tests before building
+echo "Running pre-build tests..."
+if [ -f "tests/run-all.sh" ]; then
+    bash tests/run-all.sh || { echo "Tests failed! Aborting build."; exit 1; }
+fi
+
 # 2. Cleanup
 echo "Cleaning up previous build artifacts..."
 sudo rm -rf "$WORK_DIR"
@@ -26,7 +32,7 @@ if [ -d "$PROFILE_DIR/custom_repo" ]; then
     # Remove old DB files to ensure a clean refresh
     rm -f custom.db.tar.gz custom.files.tar.gz
     # Add all packages in the directory to the database
-    repo-add -q custom.db.tar.gz *.pkg.tar.zst 2>/dev/null || echo "No custom packages found to add."
+    repo-add -q custom.db.tar.gz ./*.pkg.tar.zst 2>/dev/null || echo "No custom packages found to add."
     popd > /dev/null
 fi
 
