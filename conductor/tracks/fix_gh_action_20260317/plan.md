@@ -13,7 +13,7 @@ This phase focuses on correcting the repository paths and cleaning up the `profi
     - [ ] Run a script to check that all files in `profiledef.sh` exist in `chazos_profile/airootfs/`.
 - [x] Task: Conductor - User Manual Verification 'Correct Configuration & Cleanup' (Protocol in workflow.md)
 
-## Phase 2: Update GitHub Action Workflow
+## Phase 2: Update GitHub Action Workflow [checkpoint: 01b2027]
 This phase focuses on updating `build.yml` to correctly set up the environment and build all necessary packages.
 
 - [x] Task: Update `build.yml` to include `sudo` and correct `pacman-key` sequence 13e6118
@@ -24,7 +24,7 @@ This phase focuses on updating `build.yml` to correctly set up the environment a
     - [ ] Add the built `chazos-config` package to the custom repository using `repo-add`.
 - [x] Task: Correct `sed` command in `build.yml` e46d64b
     - [ ] Ensure it correctly replaces `{{PWD}}` in `chazos_profile/pacman.conf`.
-- [ ] Task: Conductor - User Manual Verification 'Update GitHub Action Workflow' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Update GitHub Action Workflow' (Protocol in workflow.md)
 
 ## Phase 3: Verification & Finalization
 This phase focuses on verifying the fixes by triggering the GitHub Action.
